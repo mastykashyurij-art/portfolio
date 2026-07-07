@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yurii Mastykash — Portfolio · DOOHDESIGN</title>
+<meta name="description" content="Portfolio Yurii Mastykash (DOOHDESIGN) — projektowanie i budowa nowoczesnych stron oraz landing page. Sześć zrealizowanych projektów." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --oxblood:#650108;
+    --oxblood-deep:#4a0107;
+    --cream:#F2E8D2;
+    --cream-soft:#faf4e6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cream);
+    color:var(--oxblood);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ---------- THEME CONTEXTS ---------- */
+  .sec-ox{
+    --bg:var(--oxblood-deep);
+    --fg:var(--cream);
+    --muted:rgba(242,232,210,.64);
+    --line:rgba(242,232,210,.18);
+    --line-strong:rgba(242,232,210,.36);
+    --panel:#5a010a;
+    background:var(--bg);color:var(--fg);
+  }
+  .sec-cream{
+    --bg:var(--cream);
+    --fg:var(--oxblood);
+    --muted:rgba(101,1,8,.66);
+    --line:rgba(101,1,8,.20);
+    --line-strong:rgba(101,1,8,.42);
+    --panel:var(--cream-soft);
+    background:var(--bg);color:var(--fg);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;
+    background:rgba(74,1,7,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(242,232,210,.16);
+    color:var(--cream);
+  }
+  .brand{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.16em;font-weight:700}
+  .brand span{opacity:.6}
+  .nav-links{display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,232,210,.7)}
+  .nav-links a:hover{color:var(--cream)}
+  .nav-cta{border:1px solid rgba(242,232,210,.4);color:var(--cream);padding:8px 18px;border-radius:100px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:.25s}
+  .nav-cta:hover{background:var(--cream);color:var(--oxblood)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* ---------- HERO (oxblood) ---------- */
+  header.hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    position:relative;padding:120px 0 80px;
+    background:
+      radial-gradient(circle at 80% 18%,rgba(242,232,210,.12),transparent 40%),
+      radial-gradient(circle at 8% 88%,rgba(101,1,8,.9),transparent 46%),
+      radial-gradient(circle at 50% 50%,#5a010a,#3a0107 72%);
+  }
+  .eyebrow{color:var(--cream);opacity:.9;font-size:13px;letter-spacing:.32em;text-transform:uppercase;margin-bottom:28px}
+  .eyebrow::before{content:"";display:inline-block;width:34px;height:1px;background:var(--cream);vertical-align:middle;margin-right:16px;opacity:.6}
+  h1{
+    font-family:'Playfair Display',serif;font-weight:700;
+    font-size:clamp(46px,8.4vw,98px);line-height:1.0;letter-spacing:-.01em;
+    margin-bottom:30px;
+  }
+  h1 em{font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:600}
+  .lead{max-width:600px;color:var(--muted);font-size:clamp(16px,2.2vw,20px);font-weight:300}
+  .hero-actions{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:56px;margin-top:84px;flex-wrap:wrap}
+  .hero-stats div span{display:block;font-family:'Playfair Display',serif;font-size:38px}
+  .hero-stats div small{color:var(--muted);font-size:13px;letter-spacing:.06em}
+
+  /* ---------- BUTTONS (theme aware) ---------- */
+  .btn-primary{background:var(--fg);color:var(--bg);padding:15px 34px;border-radius:100px;font-weight:600;font-size:14px;letter-spacing:.04em;transition:.25s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.28)}
+  .btn-ghost{border:1px solid var(--line-strong);padding:15px 34px;border-radius:100px;font-size:14px;letter-spacing:.04em;color:var(--fg);transition:.25s}
+  .btn-ghost:hover{border-color:var(--fg)}
+  /* hero uses oxblood context colors explicitly */
+  .hero .btn-primary{background:var(--cream);color:var(--oxblood)}
+  .hero .btn-ghost{border-color:rgba(242,232,210,.4);color:var(--cream)}
+
+  /* ---------- SECTION HEAD ---------- */
+  .section{padding:110px 0}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:56px;flex-wrap:wrap}
+  .section-head .k{opacity:.85;font-size:12px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:14px;color:var(--fg)}
+  .section-head h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,54px);font-weight:700;line-height:1.05}
+  .section-head p{color:var(--muted);max-width:360px;font-weight:300}
+
+  /* ---------- GRID / CARDS ---------- */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{
+    position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    background:var(--panel);transition:.4s cubic-bezier(.2,.7,.2,1);
+    display:flex;flex-direction:column;min-height:420px;
+  }
+  .card:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 24px 55px rgba(101,1,8,.20)}
+  .card-media{height:230px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .card-media img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .card:hover .card-media img{transform:scale(1.06)}
+  .card-media .fallback{
+    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;font-size:50px;color:var(--cream);
+    letter-spacing:.02em;text-align:center;padding:0 16px;
+  }
+  .card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 46%,rgba(101,1,8,.14))}
+  .card-body{padding:28px 28px 30px;flex:1;display:flex;flex-direction:column}
+  .card-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.8;margin-bottom:12px}
+  .card-title{font-family:'Playfair Display',serif;font-size:27px;font-weight:700;margin-bottom:10px}
+  .card-desc{color:var(--muted);font-size:14.5px;font-weight:300;flex:1}
+  .card-link{
+    margin-top:22px;display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);
+    align-self:flex-start;border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:.25s;
+  }
+  .card-link:hover{border-color:var(--fg)}
+  .card-link .arrow{transition:.25s}
+  .card-link:hover .arrow{transform:translateX(5px)}
+
+  /* oxblood tonal placeholder tiles */
+  .g-arch{background:radial-gradient(circle at 30% 28%,#7a0a12,#3a0107);position:relative}
+  .g-craft{background:radial-gradient(circle at 42% 40%,#8a1414,#43010a);position:relative}
+  .g-pekin{background:radial-gradient(circle at 70% 30%,#6f0a10,#360106);position:relative}
+  .g-arch::before,.g-craft::before,.g-pekin::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 120%,rgba(242,232,210,.16),transparent 60%);
+  }
+
+  /* ---------- ABOUT (oxblood) ---------- */
+  .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:36px}}
+  .about h2{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,48px);font-weight:700;line-height:1.1;margin-bottom:24px}
+  .about h2 em{font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:600}
+  .about p{color:var(--muted);font-weight:300;margin-bottom:18px}
+  .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .skills span{border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:12.5px;color:var(--muted);letter-spacing:.03em}
+  .about-card{border:1px solid var(--line);border-radius:20px;padding:36px;background:var(--panel)}
+
+  /* ---------- CONTACT (cream) ---------- */
+  .contact{text-align:center;padding:130px 0}
+  .contact .k{opacity:.85;font-size:12px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:20px}
+  .contact h2{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,66px);font-weight:700;line-height:1.05;margin-bottom:28px}
+  .contact h2 em{font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:600}
+  .contact a.mail{display:inline-block;margin-top:14px;font-size:clamp(18px,3vw,26px);color:var(--fg);border-bottom:1px solid var(--fg);padding-bottom:6px;transition:.25s}
+  .contact a.mail:hover{opacity:.7}
+
+  footer{padding:34px 0;font-size:13px;color:var(--muted)}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  .foot .brand{font-size:16px}
+
+  /* ---------- MOBILE ---------- */
+  @media(max-width:720px){
+    .wrap{padding:0 20px}
+    nav{padding:14px 18px}
+    .brand{font-size:17px;letter-spacing:.12em}
+    .nav-cta{padding:7px 14px;font-size:11px}
+    header.hero{padding:104px 0 64px;min-height:88vh}
+    .eyebrow{font-size:11px;letter-spacing:.22em;margin-bottom:20px}
+    .eyebrow::before{width:22px;margin-right:12px}
+    .lead{font-size:16px}
+    .hero-actions{gap:12px;margin-top:34px}
+    .hero-stats{gap:30px 40px;margin-top:52px}
+    .hero-stats div span{font-size:30px}
+    .section{padding:70px 0}
+    .section-head{margin-bottom:38px;gap:14px}
+    .section-head p{max-width:none}
+    .grid{gap:20px}
+    .card{min-height:auto}
+    .card-media{height:200px}
+    .card-media .fallback{font-size:42px}
+    .card-body{padding:24px 24px 26px}
+    .card-title{font-size:24px}
+    .about-grid{gap:32px}
+    .about-card{padding:28px}
+    .contact{padding:88px 0}
+    footer{padding:28px 0}
+    .foot{flex-direction:column;text-align:center;gap:10px}
+  }
+  @media(max-width:440px){
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .hero-actions a{text-align:center}
+    .hero-stats{gap:22px 32px}
+    .hero-stats div span{font-size:26px}
+    .hero-stats div small{font-size:12px}
+    .skills span{font-size:11.5px;padding:7px 13px}
+    .card-media{height:180px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">DOOH<span>DESIGN</span></div>
+  <div class="nav-links">
+    <a href="#work">Projekty</a>
+    <a href="#about">O mnie</a>
+    <a href="#contact">Kontakt</a>
+  </div>
+  <a href="#contact" class="nav-cta">Współpraca</a>
+</nav>
+
+<!-- HERO · OXBLOOD -->
+<header class="hero sec-ox">
+  <div class="wrap">
+    <div class="eyebrow">Yurii Mastykash · Web Design & Development</div>
+    <h1>Projektuję strony,<br>które <em>robią wrażenie</em>.</h1>
+    <p class="lead">Nowoczesne, dopracowane landing page i strony marek — od koncepcji po wdrożenie. Poniżej sześć zrealizowanych projektów, każdy dostępny na żywo.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">Zobacz projekty</a>
+      <a href="#contact" class="btn-ghost">Porozmawiajmy</a>
+    </div>
+    <div class="hero-stats">
+      <div><span>6</span><small>Zrealizowanych projektów</small></div>
+      <div><span>100%</span><small>Autorskie projekty</small></div>
+      <div><span>∞</span><small>Dbałość o detal</small></div>
+    </div>
+  </div>
+</header>
+
+<!-- WORK · CREAM -->
+<section class="section sec-cream" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="k">Wybrane realizacje</div>
+        <h2>Portfolio</h2>
+      </div>
+      <p>Każdy projekt to kompletna, responsywna strona zaprojektowana i zbudowana od zera.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-media">
+          <img src="https://dooh-barber-studio.vercel.app/1.png" alt="Boar Barber Shop" loading="lazy"
+               onerror="this.parentNode.classList.add('g-arch');this.parentNode.innerHTML='&lt;div class=\'fallback\'&gt;Boar Barber&lt;/div&gt;'">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Barber Studio · Landing</div>
+          <div class="card-title">Boar Barber Shop</div>
+          <p class="card-desc">Prestiżowa strona krakowskiego studia barberskiego — animowany preloader, sekcje usług i cennika, formularz rezerwacji. Ciemny, premium klimat.</p>
+          <a class="card-link" href="https://dooh-barber-studio.vercel.app" target="_blank" rel="noopener">Zobacz na żywo <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media">
+          <img src="https://product-event-wine.vercel.app/brand_assets/img1.png" alt="Dooh Event 360" loading="lazy"
+               onerror="this.parentNode.classList.add('g-craft');this.parentNode.innerHTML='&lt;div class=\'fallback\'&gt;Event 360°&lt;/div&gt;'">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Eventy · Fotobudka 360°</div>
+          <div class="card-title">Dooh Event 360</div>
+          <p class="card-desc">Strona premium usług eventowych — fotobudka 360°, pakiety cenowe, galeria realizacji, sekcja FAQ i formularz zapytań. Pełny, sprzedażowy landing.</p>
+          <a class="card-link" href="https://product-event-wine.vercel.app" target="_blank" rel="noopener">Zobacz na żywo <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media">
+          <img src="https://doohshop.vercel.app/Mercedesimage.png" alt="Dooh Shop" loading="lazy"
+               onerror="this.parentNode.classList.add('g-pekin');this.parentNode.innerHTML='&lt;div class=\'fallback\'&gt;Dooh Shop&lt;/div&gt;'">
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Serwis Auto · Detailing</div>
+          <div class="card-title">Dooh Shop</div>
+          <p class="card-desc">Strona krakowskiego serwisu samochodowego i studia detailingu — wideo w tle, katalog usług, galeria realizacji i opinie klientów.</p>
+          <a class="card-link" href="https://doohshop.vercel.app" target="_blank" rel="noopener">Zobacz na żywo <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media g-craft">
+          <div class="fallback">Dooh Craft</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Marka · Piwo Rzemieślnicze</div>
+          <div class="card-title">Dooh Craft</div>
+          <p class="card-desc">Strona marki piwa pszenicznego „Cerveja do Trigo" — wideo hero, historia browaru, katalog piw z parametrami i przepis flagowego trunku.</p>
+          <a class="card-link" href="https://dooh-craft.vercel.app" target="_blank" rel="noopener">Zobacz na żywo <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media g-arch">
+          <div class="fallback">YURII-M</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Personal Brand · Dev Portfolio</div>
+          <div class="card-title">Digital Architect</div>
+          <p class="card-desc">Autorska strona-wizytówka „Digital Architect" — mocny, techniczny layout z prezentacją stacku (React, TS, Node) i animowanym interfejsem. Osobista marka developerska.</p>
+          <a class="card-link" href="https://yurii-portfolio-q88gnhtl7-doohdesign.vercel.app" target="_blank" rel="noopener">Zobacz na żywo <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-media g-pekin">
+          <div class="fallback">Pekińczyk</div>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Editorial · Concept</div>
+          <div class="card-title">Pekińskie Kupki</div>
+          <p class="card-desc">Autorska, żartobliwie-elegancka strona „Centrum Pekinesa" — bogata w treść encyklopedia rasy z animowanymi sekcjami i formularzem kontaktowym.</p>
+          <a class="card-link" href="https://pekin-piles.vercel.app" target="_blank" rel="noopener">Zobacz na żywo <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT · OXBLOOD -->
+<section class="section sec-ox about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div style="opacity:.85;font-size:12px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:16px">O mnie</div>
+        <h2>Zamieniam pomysły w <em>dopracowane</em> strony.</h2>
+        <p>Nazywam się Yurii Mastykash i pod marką DOOHDESIGN projektuję oraz buduję nowoczesne strony internetowe i landing page. Skupiam się na estetyce premium, płynnych animacjach i responsywności na każdym urządzeniu.</p>
+        <p>Każdy z projektów w tym portfolio zaprojektowałem od zera i wdrożyłem na żywo — od koncepcji wizualnej, przez kod, po publikację.</p>
+        <div class="skills">
+          <span>UI / UX Design</span>
+          <span>HTML / CSS / JS</span>
+          <span>Landing Pages</span>
+          <span>Animacje</span>
+          <span>Responsywność</span>
+          <span>Wdrożenia Vercel</span>
+        </div>
+      </div>
+      <div>
+        <div class="about-card">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px">Otwarty na współpracę</div>
+          <p style="color:var(--muted);font-weight:300;margin-bottom:24px">Szukasz strony dla swojej marki lub firmy? Chętnie pomogę.</p>
+          <a href="#contact" class="btn-primary" style="display:inline-block">Napisz do mnie</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT · CREAM -->
+<section class="contact sec-cream" id="contact">
+  <div class="wrap">
+    <div class="k">Kontakt</div>
+    <h2>Zbudujmy coś <em>wyjątkowego</em>.</h2>
+    <p style="color:var(--muted);max-width:480px;margin:0 auto;font-weight:300">Masz projekt na oku? Napisz — odpowiem najszybciej jak to możliwe.</p>
+    <a class="mail" href="mailto:mastykash.yurij@gmail.com">mastykash.yurij@gmail.com</a>
+  </div>
+</section>
+
+<!-- FOOTER · OXBLOOD -->
+<footer class="sec-ox">
+  <div class="wrap foot">
+    <div class="brand">DOOH<span>DESIGN</span></div>
+    <div>© 2026 Yurii Mastykash · Wszystkie projekty autorskie</div>
+  </div>
+</footer>
+
+</body>
+</html>
