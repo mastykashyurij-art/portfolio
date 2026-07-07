@@ -58,7 +58,7 @@
     border-bottom:1px solid rgba(242,232,210,.16);
     color:var(--cream);
   }
-  .brand{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.16em;font-weight:700}
+  .brand{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.16em;font-weight:700;cursor:pointer}
   .brand span{opacity:.6}
   .nav-links{display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(242,232,210,.7)}
   .nav-links a:hover{color:var(--cream)}
@@ -209,7 +209,7 @@
 <body>
 
 <nav>
-  <div class="brand">DOOH<span>DESIGN</span></div>
+  <a href="#top" class="brand" aria-label="Wróć na stronę główną">DOOH<span>DESIGN</span></a>
   <div class="nav-links">
     <a href="#work">Projekty</a>
     <a href="#about">O mnie</a>
@@ -219,7 +219,7 @@
 </nav>
 
 <!-- HERO · OXBLOOD -->
-<header class="hero sec-ox">
+<header class="hero sec-ox" id="top">
   <div class="wrap">
     <div class="eyebrow">Yurii Mastykash · Web Design & Development</div>
     <h1>Projektuję strony,<br>które <em>robią wrażenie</em>.</h1>
