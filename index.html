@@ -163,6 +163,17 @@
   .contact a.mail{display:inline-block;margin-top:14px;font-size:clamp(18px,3vw,26px);color:var(--fg);border-bottom:1px solid var(--fg);padding-bottom:6px;transition:.25s}
   .contact a.mail:hover{opacity:.7}
 
+  /* typewriter caret */
+  .typewriter::after{
+    content:"|";
+    display:inline-block;
+    font-style:normal;font-weight:400;
+    margin-left:.04em;
+    transform:translateY(-.02em);
+    animation:tw-blink 1s steps(1,end) infinite;
+  }
+  @keyframes tw-blink{50%{opacity:0}}
+
   footer{padding:34px 0;font-size:13px;color:var(--muted)}
   .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
   .foot .brand{font-size:16px}
@@ -222,7 +233,7 @@
 <header class="hero sec-ox" id="top">
   <div class="wrap">
     <div class="eyebrow">Yurii Mastykash · Web Design & Development</div>
-    <h1>Projektuję strony,<br>które <em>robią wrażenie</em>.</h1>
+    <h1>Projektuję strony,<br>które <em class="typewriter" data-text="robią wrażenie">robią wrażenie</em>.</h1>
     <p class="lead">Nowoczesne, dopracowane landing page i strony marek — od koncepcji po wdrożenie. Poniżej sześć zrealizowanych projektów, każdy dostępny na żywo.</p>
     <div class="hero-actions">
       <a href="#work" class="btn-primary">Zobacz projekty</a>
@@ -361,7 +372,7 @@
 <section class="contact sec-cream" id="contact">
   <div class="wrap">
     <div class="k">Kontakt</div>
-    <h2>Zbudujmy coś <em>wyjątkowego</em>.</h2>
+    <h2>Zbudujmy coś <em class="typewriter" data-text="wyjątkowego">wyjątkowego</em>.</h2>
     <p style="color:var(--muted);max-width:480px;margin:0 auto;font-weight:300">Masz projekt na oku? Napisz — odpowiem najszybciej jak to możliwe.</p>
     <a class="mail" href="mailto:mastykash.yurij@gmail.com">mastykash.yurij@gmail.com</a>
   </div>
@@ -375,5 +386,32 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    function loop(el, text){
+      var i = 0, deleting = false;
+      var typeSpeed = 95, delSpeed = 45, holdFull = 1500, holdEmpty = 500;
+      function tick(){
+        if(!deleting){
+          i++;
+          el.textContent = text.slice(0, i);
+          if(i === text.length){ deleting = true; return setTimeout(tick, holdFull); }
+          setTimeout(tick, typeSpeed);
+        } else {
+          i--;
+          el.textContent = text.slice(0, i);
+          if(i === 0){ deleting = false; return setTimeout(tick, holdEmpty); }
+          setTimeout(tick, delSpeed);
+        }
+      }
+      setTimeout(tick, 600);
+    }
+    document.querySelectorAll('.typewriter').forEach(function(el){
+      var text = el.getAttribute('data-text') || el.textContent;
+      el.textContent = '';
+      loop(el, text);
+    });
+  })();
+</script>
 </body>
 </html>
