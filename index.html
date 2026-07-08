@@ -174,6 +174,43 @@
   }
   @keyframes tw-blink{50%{opacity:0}}
 
+  /* preloader — logo drops from top, holds center */
+  #preloader{
+    position:fixed;inset:0;z-index:9999;
+    background:
+      radial-gradient(circle at 50% 42%,#fbf6ea,var(--cream));
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  #preloader .pl-logo{
+    width:min(440px,74vw);height:auto;display:block;
+    filter:drop-shadow(0 26px 40px rgba(67,1,10,.20));
+    animation:logoDrop 2.1s cubic-bezier(.16,1,.3,1) both;
+    will-change:transform,opacity;
+  }
+  #preloader .pl-bar{
+    position:absolute;left:50%;bottom:14%;transform:translateX(-50%);
+    width:150px;height:2px;border-radius:2px;overflow:hidden;
+    background:rgba(101,1,8,.15);opacity:0;animation:plFade .6s ease 1.4s forwards;
+  }
+  #preloader .pl-bar::after{
+    content:"";position:absolute;inset:0;left:-40%;width:40%;
+    background:var(--oxblood);border-radius:2px;
+    animation:plSlide 1.1s ease-in-out 1.5s infinite;
+  }
+  @keyframes logoDrop{
+    0%{transform:translateY(-118vh) rotate(-2deg);opacity:0}
+    14%{opacity:1}
+    100%{transform:translateY(0) rotate(0);opacity:1}
+  }
+  @keyframes plFade{to{opacity:1}}
+  @keyframes plSlide{0%{left:-40%}100%{left:100%}}
+  body.pl-lock{overflow:hidden}
+  @media(prefers-reduced-motion:reduce){
+    #preloader .pl-logo{animation:plFade .6s ease both}
+  }
+
   footer{padding:34px 0;font-size:13px;color:var(--muted)}
   .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
   .foot .brand{font-size:16px}
@@ -218,6 +255,12 @@
 </style>
 </head>
 <body>
+
+<div id="preloader" role="status" aria-label="Ładowanie">
+  <img class="pl-logo" alt="DOOH DESIGN"
+       src="https://d8j0ntlcm91z4.cloudfront.net/user_3DJWvslQhFmcImdCgo6Xk1cHUmH/hf_20260708_160806_21692f54-2de0-4814-9851-df13c9e554e0.png" />
+  <div class="pl-bar"></div>
+</div>
 
 <nav>
   <a href="#top" class="brand" aria-label="Wróć na stronę główną">DOOH<span>DESIGN</span></a>
@@ -411,6 +454,30 @@
       el.textContent = '';
       loop(el, text);
     });
+  })();
+</script>
+<script>
+  (function(){
+    var pre = document.getElementById('preloader');
+    if(!pre) return;
+    document.body.classList.add('pl-lock');
+    var start = Date.now();
+    var MIN_SHOW = 2900;               // drop (~2.1s) + hold (~0.8s)
+    function reveal(){
+      var wait = Math.max(0, MIN_SHOW - (Date.now() - start));
+      setTimeout(function(){
+        pre.classList.add('hidden');
+        document.body.classList.remove('pl-lock');
+        setTimeout(function(){ if(pre && pre.parentNode) pre.parentNode.removeChild(pre); }, 900);
+      }, wait);
+    }
+    if(document.readyState === 'complete'){ reveal(); }
+    else { window.addEventListener('load', reveal); }
+    // hard safety: never trap the user
+    setTimeout(reveal, 6000);
+    // if the logo fails to load, still run the timed reveal
+    var img = pre.querySelector('.pl-logo');
+    if(img){ img.addEventListener('error', reveal); }
   })();
 </script>
 </body>
